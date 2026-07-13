@@ -1,0 +1,13 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@rapportPhaGDis.edit.headline">Edit Rapport Pha GDis</h1>
+    <div>
+        <a routerLink="/rapportPhaGDiss" class="btn btn-secondary" i18n="@@rapportPhaGDis.edit.back">Back to list</a>
+    </div>
+</div>
+<form [formGroup]="editForm" (ngSubmit)="handleSubmit()">
+    <app-input-row [group]="editForm" field="id" i18n-label="@@rapportPhaGDis.id.label" label="Id" />
+    <app-input-row [group]="editForm" field="name" i18n-label="@@rapportPhaGDis.name.label" label="Name" />
+    <app-input-row [group]="editForm" field="created" rowType="datepicker" i18n-label="@@rapportPhaGDis.created.label" label="Created" />
+    <app-input-row [group]="editForm" field="exportedDate" rowType="datepicker" i18n-label="@@rapportPhaGDis.exportedDate.label" label="Exported Date" />
+    <input type="submit" i18n-value="@@rapportPhaGDis.edit.headline" value="Edit Rapport Pha GDis" class="btn btn-primary mt-4" />
+</form>

@@ -1,0 +1,39 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@detailSDUPhaGDis.list.headline">Detail SDUPha GDises</h1>
+    <div>
+        <a routerLink="/detailSDUPhaGDiss/add" class="btn btn-primary ms-2" i18n="@@detailSDUPhaGDis.list.createNew">Create new Detail SDUPha GDis</a>
+    </div>
+</div>
+@if (!detailSDUPhaGDises || detailSDUPhaGDises.length === 0) {
+<div i18n="@@detailSDUPhaGDis.list.empty">No Detail SDUPha GDises could be found.</div>
+} @else {
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+        <thead>
+            <tr>
+                <th scope="col" i18n="@@detailSDUPhaGDis.id.label">Id</th>
+                <th scope="col" i18n="@@detailSDUPhaGDis.sdu.label">Sdu</th>
+                <th scope="col" i18n="@@detailSDUPhaGDis.datePeremption.label">Date Peremption</th>
+                <th scope="col" i18n="@@detailSDUPhaGDis.detailSDU.label">Detail SDU</th>
+                <th><!-- --></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (detailSDUPhaGDis of detailSDUPhaGDises; track detailSDUPhaGDis.id) {
+            <tr>
+                <td>{{ detailSDUPhaGDis.id }}</td>
+                <td>{{ detailSDUPhaGDis.sdu }}</td>
+                <td>{{ detailSDUPhaGDis.datePeremption }}</td>
+                <td>{{ detailSDUPhaGDis.detailSDU }}</td>
+                <td>
+                    <div class="float-end text-nowrap">
+                        <a [routerLink]="['/detailSDUPhaGDiss/edit', detailSDUPhaGDis.id]" class="btn btn-sm btn-secondary" i18n="@@detailSDUPhaGDis.list.edit">Edit</a>
+                        <button type="button" (click)="confirmDelete(detailSDUPhaGDis.id!)" class="btn btn-sm btn-secondary" i18n="@@detailSDUPhaGDis.list.delete">Delete</button>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+}

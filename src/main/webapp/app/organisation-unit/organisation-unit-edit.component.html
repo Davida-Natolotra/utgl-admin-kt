@@ -1,0 +1,30 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@organisationUnit.edit.headline">Edit Organisation Unit</h1>
+    <div>
+        <a routerLink="/organisationUnits" class="btn btn-secondary" i18n="@@organisationUnit.edit.back">Back to list</a>
+    </div>
+</div>
+<form [formGroup]="editForm" (ngSubmit)="handleSubmit()">
+    <input type="submit" i18n-value="@@organisationUnit.edit.headline" value="Edit Organisation Unit" class="btn btn-primary mt-4 mb-4" />
+    <app-input-row [group]="editForm" field="id" i18n-label="@@organisationUnit.id.label" label="Id" />
+    <app-input-row [group]="editForm" field="code" i18n-label="@@organisationUnit.code.label" label="Code" />
+    <app-input-row [group]="editForm" field="name" i18n-label="@@organisationUnit.name.label" label="Name" />
+    <app-input-row [group]="editForm" field="shortName" i18n-label="@@organisationUnit.shortName.label" label="Short Name" />
+    <app-input-row [group]="editForm" field="level" rowType="number" i18n-label="@@organisationUnit.level.label" label="Level" />
+    <app-input-row [group]="editForm" field="openingDate" rowType="datetimepicker" i18n-label="@@organisationUnit.openingDate.label" label="Opening Date" />
+    <app-input-row [group]="editForm" field="closeDate" rowType="datetimepicker" i18n-label="@@organisationUnit.closeDate.label" label="Close Date" />
+    <app-input-row [group]="editForm" field="geometry" rowType="textarea" i18n-label="@@organisationUnit.geometry.label" label="Geometry" />
+    <app-input-row [group]="editForm" field="address" i18n-label="@@organisationUnit.address.label" label="Address" />
+    <app-input-row [group]="editForm" field="description" rowType="textarea" i18n-label="@@organisationUnit.description.label" label="Description" />
+    <app-input-row [group]="editForm" field="email" i18n-label="@@organisationUnit.email.label" label="Email" />
+    <app-input-row [group]="editForm" field="phoneNumber" i18n-label="@@organisationUnit.phoneNumber.label" label="Phone Number" />
+    <app-input-row [group]="editForm" field="contactPerson" i18n-label="@@organisationUnit.contactPerson.label" label="Contact Person" />
+    <app-input-row [group]="editForm" field="comment" rowType="textarea" i18n-label="@@organisationUnit.comment.label" label="Comment" />
+    <app-input-row [group]="editForm" field="translations" rowType="textarea" i18n-label="@@organisationUnit.translations.label" label="Translations" />
+    <app-input-row [group]="editForm" field="attributeValues" rowType="textarea" i18n-label="@@organisationUnit.attributeValues.label" label="Attribute Values" />
+    <app-input-row [group]="editForm" field="createdBy" rowType="textarea" i18n-label="@@organisationUnit.createdBy.label" label="Created By" />
+    <app-input-row [group]="editForm" field="lastUpdatedBy" rowType="textarea" i18n-label="@@organisationUnit.lastUpdatedBy.label" label="Last Updated By" />
+    <app-input-row [group]="editForm" field="created" rowType="datetimepicker" i18n-label="@@organisationUnit.created.label" label="Created" />
+    <app-input-row [group]="editForm" field="parent" rowType="select" [options]="parentValues" i18n-label="@@organisationUnit.parent.label" label="Parent" />
+    <input type="submit" i18n-value="@@organisationUnit.edit.headline" value="Edit Organisation Unit" class="btn btn-primary mt-4" />
+</form>

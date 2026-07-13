@@ -1,0 +1,47 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@rapportDistrict.list.headline">Rapport Districts</h1>
+    <div>
+        <a routerLink="/rapportDistricts/add" class="btn btn-primary ms-2" i18n="@@rapportDistrict.list.createNew">Create new Rapport District</a>
+    </div>
+</div>
+@if (!rapportDistricts || rapportDistricts.length === 0) {
+<div i18n="@@rapportDistrict.list.empty">No Rapport Districts could be found.</div>
+} @else {
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+        <thead>
+            <tr>
+                <th scope="col" i18n="@@rapportDistrict.id.label">Id</th>
+                <th scope="col" i18n="@@rapportDistrict.moisAnnee.label">Mois Annee</th>
+                <th scope="col" i18n="@@rapportDistrict.name.label">Name</th>
+                <th scope="col" i18n="@@rapportDistrict.exportingDate.label">Exporting Date</th>
+                <th scope="col" i18n="@@rapportDistrict.importingDate.label">Importing Date</th>
+                <th scope="col" i18n="@@rapportDistrict.created.label">Created</th>
+                <th scope="col" i18n="@@rapportDistrict.drsp.label">Drsp</th>
+                <th scope="col" i18n="@@rapportDistrict.sdsp.label">Sdsp</th>
+                <th><!-- --></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (rapportDistrict of rapportDistricts; track rapportDistrict.id) {
+            <tr>
+                <td>{{ rapportDistrict.id }}</td>
+                <td>{{ rapportDistrict.moisAnnee }}</td>
+                <td>{{ rapportDistrict.name }}</td>
+                <td>{{ rapportDistrict.exportingDate }}</td>
+                <td>{{ rapportDistrict.importingDate }}</td>
+                <td>{{ rapportDistrict.created }}</td>
+                <td>{{ rapportDistrict.drsp }}</td>
+                <td>{{ rapportDistrict.sdsp }}</td>
+                <td>
+                    <div class="float-end text-nowrap">
+                        <a [routerLink]="['/rapportDistricts/edit', rapportDistrict.id]" class="btn btn-sm btn-secondary" i18n="@@rapportDistrict.list.edit">Edit</a>
+                        <button type="button" (click)="confirmDelete(rapportDistrict.id!)" class="btn btn-sm btn-secondary" i18n="@@rapportDistrict.list.delete">Delete</button>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+}

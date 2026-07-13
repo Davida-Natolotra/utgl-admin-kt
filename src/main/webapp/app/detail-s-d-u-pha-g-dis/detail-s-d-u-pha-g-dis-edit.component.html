@@ -1,0 +1,13 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@detailSDUPhaGDis.edit.headline">Edit Detail SDUPha GDis</h1>
+    <div>
+        <a routerLink="/detailSDUPhaGDiss" class="btn btn-secondary" i18n="@@detailSDUPhaGDis.edit.back">Back to list</a>
+    </div>
+</div>
+<form [formGroup]="editForm" (ngSubmit)="handleSubmit()">
+    <app-input-row [group]="editForm" field="id" i18n-label="@@detailSDUPhaGDis.id.label" label="Id" />
+    <app-input-row [group]="editForm" field="sdu" rowType="number" i18n-label="@@detailSDUPhaGDis.sdu.label" label="Sdu" />
+    <app-input-row [group]="editForm" field="datePeremption" rowType="datepicker" i18n-label="@@detailSDUPhaGDis.datePeremption.label" label="Date Peremption" />
+    <app-input-row [group]="editForm" field="detailSDU" rowType="select" [options]="detailSDUValues" i18n-label="@@detailSDUPhaGDis.detailSDU.label" label="Detail SDU" />
+    <input type="submit" i18n-value="@@detailSDUPhaGDis.edit.headline" value="Edit Detail SDUPha GDis" class="btn btn-primary mt-4" />
+</form>

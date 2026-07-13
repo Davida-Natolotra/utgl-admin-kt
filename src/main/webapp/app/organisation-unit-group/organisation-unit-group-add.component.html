@@ -1,0 +1,11 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@organisationUnitGroup.add.headline">Add Organisation Unit Group</h1>
+    <div>
+        <a routerLink="/organisationUnitGroups" class="btn btn-secondary" i18n="@@organisationUnitGroup.add.back">Back to list</a>
+    </div>
+</div>
+<form [formGroup]="addForm" (ngSubmit)="handleSubmit()">
+    <app-input-row [group]="addForm" field="name" i18n-label="@@organisationUnitGroup.name.label" label="Name" />
+    <app-input-row [group]="addForm" field="organisationUnits" rowType="multiselect" [options]="organisationUnitsValues" i18n-label="@@organisationUnitGroup.organisationUnits.label" label="Organisation Units" />
+    <input type="submit" i18n-value="@@organisationUnitGroup.add.headline" value="Add Organisation Unit Group" class="btn btn-primary mt-4" />
+</form>

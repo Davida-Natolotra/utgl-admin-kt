@@ -1,0 +1,39 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@rapportPhaGDis.list.headline">Rapport Pha GDises</h1>
+    <div>
+        <a routerLink="/rapportPhaGDiss/add" class="btn btn-primary ms-2" i18n="@@rapportPhaGDis.list.createNew">Create new Rapport Pha GDis</a>
+    </div>
+</div>
+@if (!rapportPhaGDises || rapportPhaGDises.length === 0) {
+<div i18n="@@rapportPhaGDis.list.empty">No Rapport Pha GDises could be found.</div>
+} @else {
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+        <thead>
+            <tr>
+                <th scope="col" i18n="@@rapportPhaGDis.id.label">Id</th>
+                <th scope="col" i18n="@@rapportPhaGDis.name.label">Name</th>
+                <th scope="col" i18n="@@rapportPhaGDis.created.label">Created</th>
+                <th scope="col" i18n="@@rapportPhaGDis.exportedDate.label">Exported Date</th>
+                <th><!-- --></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (rapportPhaGDis of rapportPhaGDises; track rapportPhaGDis.id) {
+            <tr>
+                <td>{{ rapportPhaGDis.id }}</td>
+                <td>{{ rapportPhaGDis.name }}</td>
+                <td>{{ rapportPhaGDis.created }}</td>
+                <td>{{ rapportPhaGDis.exportedDate }}</td>
+                <td>
+                    <div class="float-end text-nowrap">
+                        <a [routerLink]="['/rapportPhaGDiss/edit', rapportPhaGDis.id]" class="btn btn-sm btn-secondary" i18n="@@rapportPhaGDis.list.edit">Edit</a>
+                        <button type="button" (click)="confirmDelete(rapportPhaGDis.id!)" class="btn btn-sm btn-secondary" i18n="@@rapportPhaGDis.list.delete">Delete</button>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+}

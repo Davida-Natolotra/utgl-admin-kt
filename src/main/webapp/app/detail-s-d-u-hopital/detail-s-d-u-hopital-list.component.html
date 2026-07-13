@@ -1,0 +1,39 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@detailSDUHopital.list.headline">Detail SDUHopitals</h1>
+    <div>
+        <a routerLink="/detailSDUHopitals/add" class="btn btn-primary ms-2" i18n="@@detailSDUHopital.list.createNew">Create new Detail SDUHopital</a>
+    </div>
+</div>
+@if (!detailSDUHopitals || detailSDUHopitals.length === 0) {
+<div i18n="@@detailSDUHopital.list.empty">No Detail SDUHopitals could be found.</div>
+} @else {
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+        <thead>
+            <tr>
+                <th scope="col" i18n="@@detailSDUHopital.id.label">Id</th>
+                <th scope="col" i18n="@@detailSDUHopital.sdu.label">Sdu</th>
+                <th scope="col" i18n="@@detailSDUHopital.datePeremption.label">Date Peremption</th>
+                <th scope="col" i18n="@@detailSDUHopital.detailSDU.label">Detail SDU</th>
+                <th><!-- --></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (detailSDUHopital of detailSDUHopitals; track detailSDUHopital.id) {
+            <tr>
+                <td>{{ detailSDUHopital.id }}</td>
+                <td>{{ detailSDUHopital.sdu }}</td>
+                <td>{{ detailSDUHopital.datePeremption }}</td>
+                <td>{{ detailSDUHopital.detailSDU }}</td>
+                <td>
+                    <div class="float-end text-nowrap">
+                        <a [routerLink]="['/detailSDUHopitals/edit', detailSDUHopital.id]" class="btn btn-sm btn-secondary" i18n="@@detailSDUHopital.list.edit">Edit</a>
+                        <button type="button" (click)="confirmDelete(detailSDUHopital.id!)" class="btn btn-sm btn-secondary" i18n="@@detailSDUHopital.list.delete">Delete</button>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+}

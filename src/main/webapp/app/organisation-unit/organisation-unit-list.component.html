@@ -1,0 +1,42 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@organisationUnit.list.headline">Organisation Units</h1>
+    <div>
+        <a routerLink="/organisationUnits/add" class="btn btn-primary ms-2" i18n="@@organisationUnit.list.createNew">Import Organisation Units</a>
+    </div>
+</div>
+@if (!roots || roots.length === 0) {
+<div i18n="@@organisationUnit.list.empty">No Organisation Units could be found.</div>
+} @else {
+<ng-template #nodeTpl let-nodes let-depth="depth">
+    <ul class="list-unstyled mb-0" [class.ms-4]="depth > 0">
+        @for (node of nodes; track node.id) {
+        <li class="py-1">
+            <div class="d-flex align-items-center gap-2">
+                @if (node.loading) {
+                <span class="spinner-border spinner-border-sm text-secondary" role="status" aria-hidden="true"></span>
+                } @else if (node.childCount > 0) {
+                <button type="button" class="btn btn-sm btn-link p-0 text-decoration-none text-secondary"
+                        (click)="toggle(node)" [attr.aria-expanded]="!!node.expanded"
+                        [attr.aria-label]="node.expanded ? 'Collapse' : 'Expand'">
+                    {{ node.expanded ? '▾' : '▸' }}
+                </button>
+                } @else {
+                <span class="d-inline-block" style="width: 0.85rem;"></span>
+                }
+                <a [routerLink]="['/organisationUnits/edit', node.id]" class="text-decoration-none">{{ node.name }}</a>
+                @if (node.childCount > 0) {
+                <span class="badge text-bg-light">{{ node.childCount }}</span>
+                }
+<!--                <button type="button" (click)="confirmDelete(node.id)"-->
+<!--                        class="btn btn-sm btn-link text-danger p-0" aria-label="Delete" title="Delete"-->
+<!--                        i18n-title="@@organisationUnit.list.delete" i18n-aria-label="@@organisationUnit.list.delete">&times;</button>-->
+            </div>
+            @if (node.expanded && node.children) {
+            <ng-container *ngTemplateOutlet="nodeTpl; context: { $implicit: node.children, depth: depth + 1 }" />
+            }
+        </li>
+        }
+    </ul>
+</ng-template>
+<ng-container *ngTemplateOutlet="nodeTpl; context: { $implicit: roots, depth: 0 }" />
+}

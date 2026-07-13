@@ -1,0 +1,13 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@produit.add.headline">Add Produit</h1>
+    <div>
+        <a routerLink="/produits" class="btn btn-secondary" i18n="@@produit.add.back">Back to list</a>
+    </div>
+</div>
+<form [formGroup]="addForm" (ngSubmit)="handleSubmit()">
+    <app-input-row [group]="addForm" field="name" i18n-label="@@produit.name.label" label="Name" />
+    <app-input-row [group]="addForm" field="unit" i18n-label="@@produit.unit.label" label="Unit" />
+    <app-input-row [group]="addForm" field="code" i18n-label="@@produit.code.label" label="Code" />
+    <app-input-row [group]="addForm" field="edited" rowType="datetimepicker" i18n-label="@@produit.edited.label" label="Edited" />
+    <input type="submit" i18n-value="@@produit.add.headline" value="Add Produit" class="btn btn-primary mt-4" />
+</form>

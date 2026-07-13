@@ -1,0 +1,18 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@rapportDistrict.edit.headline">Edit Rapport District</h1>
+    <div>
+        <a routerLink="/rapportDistricts" class="btn btn-secondary" i18n="@@rapportDistrict.edit.back">Back to list</a>
+    </div>
+</div>
+<form [formGroup]="editForm" (ngSubmit)="handleSubmit()">
+    <app-input-row [group]="editForm" field="id" i18n-label="@@rapportDistrict.id.label" label="Id" />
+    <app-input-row [group]="editForm" field="moisAnnee" rowType="datepicker" i18n-label="@@rapportDistrict.moisAnnee.label" label="Mois Annee" />
+    <app-input-row [group]="editForm" field="name" i18n-label="@@rapportDistrict.name.label" label="Name" />
+    <app-input-row [group]="editForm" field="exportingDate" rowType="datepicker" i18n-label="@@rapportDistrict.exportingDate.label" label="Exporting Date" />
+    <app-input-row [group]="editForm" field="importingDate" rowType="datepicker" i18n-label="@@rapportDistrict.importingDate.label" label="Importing Date" />
+    <app-input-row [group]="editForm" field="created" rowType="datepicker" i18n-label="@@rapportDistrict.created.label" label="Created" />
+    <app-input-row [group]="editForm" field="drsp" rowType="select" [options]="drspValues" i18n-label="@@rapportDistrict.drsp.label" label="Drsp" />
+    <app-input-row [group]="editForm" field="sdsp" rowType="select" [options]="sdspValues" i18n-label="@@rapportDistrict.sdsp.label" label="Sdsp" />
+    <app-input-row [group]="editForm" field="rapport" rowType="select" [options]="rapportValues" i18n-label="@@rapportDistrict.rapport.label" label="Rapport" />
+    <input type="submit" i18n-value="@@rapportDistrict.edit.headline" value="Edit Rapport District" class="btn btn-primary mt-4" />
+</form>

@@ -1,0 +1,15 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@rapportfs.edit.headline">Edit Rapportfs</h1>
+    <div>
+        <a routerLink="/rapportfss" class="btn btn-secondary" i18n="@@rapportfs.edit.back">Back to list</a>
+    </div>
+</div>
+<form [formGroup]="editForm" (ngSubmit)="handleSubmit()">
+    <app-input-row [group]="editForm" field="id" i18n-label="@@rapportfs.id.label" label="Id" />
+    <app-input-row [group]="editForm" field="name" i18n-label="@@rapportfs.name.label" label="Name" />
+    <app-input-row [group]="editForm" field="created" rowType="timepicker" i18n-label="@@rapportfs.created.label" label="Created" />
+    <app-input-row [group]="editForm" field="exportedDate" rowType="datepicker" i18n-label="@@rapportfs.exportedDate.label" label="Exported Date" />
+    <app-input-row [group]="editForm" field="fs" rowType="select" [options]="fsValues" i18n-label="@@rapportfs.fs.label" label="Fs" />
+    <app-input-row [group]="editForm" field="rapportDistrict" rowType="select" [options]="rapportDistrictValues" i18n-label="@@rapportfs.rapportDistrict.label" label="Rapport District" />
+    <input type="submit" i18n-value="@@rapportfs.edit.headline" value="Edit Rapportfs" class="btn btn-primary mt-4" />
+</form>

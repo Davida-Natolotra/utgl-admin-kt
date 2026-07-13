@@ -1,0 +1,47 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@rapportFSLigne.list.headline">Rapport FSLignes</h1>
+    <div>
+        <a routerLink="/rapportFSLignes/add" class="btn btn-primary ms-2" i18n="@@rapportFSLigne.list.createNew">Create new Rapport FSLigne</a>
+    </div>
+</div>
+@if (!rapportFSLignes || rapportFSLignes.length === 0) {
+<div i18n="@@rapportFSLigne.list.empty">No Rapport FSLignes could be found.</div>
+} @else {
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+        <thead>
+            <tr>
+                <th scope="col" i18n="@@rapportFSLigne.id.label">Id</th>
+                <th scope="col" i18n="@@rapportFSLigne.qteDispoDebMois.label">Qte Dispo Deb Mois</th>
+                <th scope="col" i18n="@@rapportFSLigne.qteRecMois.label">Qte Rec Mois</th>
+                <th scope="col" i18n="@@rapportFSLigne.qteDistPatient.label">Qte Dist Patient</th>
+                <th scope="col" i18n="@@rapportFSLigne.qteDistAC.label">Qte Dist AC</th>
+                <th scope="col" i18n="@@rapportFSLigne.qtePerimeAvarieMois.label">Qte Perime Avarie Mois</th>
+                <th scope="col" i18n="@@rapportFSLigne.qteRedeplMois.label">Qte Redepl Mois</th>
+                <th scope="col" i18n="@@rapportFSLigne.nbJourRupture.label">Nb Jour Rupture</th>
+                <th><!-- --></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (rapportFSLigne of rapportFSLignes; track rapportFSLigne.id) {
+            <tr>
+                <td>{{ rapportFSLigne.id }}</td>
+                <td>{{ rapportFSLigne.qteDispoDebMois }}</td>
+                <td>{{ rapportFSLigne.qteRecMois }}</td>
+                <td>{{ rapportFSLigne.qteDistPatient }}</td>
+                <td>{{ rapportFSLigne.qteDistAC }}</td>
+                <td>{{ rapportFSLigne.qtePerimeAvarieMois }}</td>
+                <td>{{ rapportFSLigne.qteRedeplMois }}</td>
+                <td>{{ rapportFSLigne.nbJourRupture }}</td>
+                <td>
+                    <div class="float-end text-nowrap">
+                        <a [routerLink]="['/rapportFSLignes/edit', rapportFSLigne.id]" class="btn btn-sm btn-secondary" i18n="@@rapportFSLigne.list.edit">Edit</a>
+                        <button type="button" (click)="confirmDelete(rapportFSLigne.id!)" class="btn btn-sm btn-secondary" i18n="@@rapportFSLigne.list.delete">Delete</button>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+}

@@ -1,0 +1,13 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@produitProgrammeOrgGroup.add.headline">Add Produit Programme Org Group</h1>
+    <div>
+        <a routerLink="/produitProgrammeOrgGroups" class="btn btn-secondary" i18n="@@produitProgrammeOrgGroup.add.back">Back to list</a>
+    </div>
+</div>
+<form [formGroup]="addForm" (ngSubmit)="handleSubmit()">
+    <app-input-row [group]="addForm" field="produit" rowType="select" [options]="produitValues" i18n-label="@@produitProgrammeOrgGroup.produit.label" label="Produit" />
+    <app-input-row [group]="addForm" field="programme" rowType="select" [options]="programmeValues" i18n-label="@@produitProgrammeOrgGroup.programme.label" label="Programme" />
+    <app-input-row [group]="addForm" field="orgGroup" rowType="select" [options]="orgGroupValues" i18n-label="@@produitProgrammeOrgGroup.orgGroup.label" label="Org Group" />
+    <app-input-row [group]="addForm" field="produitProgrammeNiveau" rowType="select" [options]="produitProgrammeNiveauValues" i18n-label="@@produitProgrammeOrgGroup.produitProgrammeNiveau.label" label="Produit Programme Niveau" />
+    <input type="submit" i18n-value="@@produitProgrammeOrgGroup.add.headline" value="Add Produit Programme Org Group" class="btn btn-primary mt-4" />
+</form>

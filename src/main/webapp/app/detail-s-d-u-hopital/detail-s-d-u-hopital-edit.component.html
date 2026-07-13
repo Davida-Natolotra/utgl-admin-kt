@@ -1,0 +1,13 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@detailSDUHopital.edit.headline">Edit Detail SDUHopital</h1>
+    <div>
+        <a routerLink="/detailSDUHopitals" class="btn btn-secondary" i18n="@@detailSDUHopital.edit.back">Back to list</a>
+    </div>
+</div>
+<form [formGroup]="editForm" (ngSubmit)="handleSubmit()">
+    <app-input-row [group]="editForm" field="id" i18n-label="@@detailSDUHopital.id.label" label="Id" />
+    <app-input-row [group]="editForm" field="sdu" rowType="number" i18n-label="@@detailSDUHopital.sdu.label" label="Sdu" />
+    <app-input-row [group]="editForm" field="datePeremption" rowType="datepicker" i18n-label="@@detailSDUHopital.datePeremption.label" label="Date Peremption" />
+    <app-input-row [group]="editForm" field="detailSDU" rowType="select" [options]="detailSDUValues" i18n-label="@@detailSDUHopital.detailSDU.label" label="Detail SDU" />
+    <input type="submit" i18n-value="@@detailSDUHopital.edit.headline" value="Edit Detail SDUHopital" class="btn btn-primary mt-4" />
+</form>

@@ -1,0 +1,47 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@rapportHopitaux.list.headline">Rapport Hopitauxes</h1>
+    <div>
+        <a routerLink="/rapportHopitauxes/add" class="btn btn-primary ms-2" i18n="@@rapportHopitaux.list.createNew">Create new Rapport Hopitaux</a>
+    </div>
+</div>
+@if (!rapportHopitauxes || rapportHopitauxes.length === 0) {
+<div i18n="@@rapportHopitaux.list.empty">No Rapport Hopitauxes could be found.</div>
+} @else {
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+        <thead>
+            <tr>
+                <th scope="col" i18n="@@rapportHopitaux.id.label">Id</th>
+                <th scope="col" i18n="@@rapportHopitaux.moisAnnee.label">Mois Annee</th>
+                <th scope="col" i18n="@@rapportHopitaux.name.label">Name</th>
+                <th scope="col" i18n="@@rapportHopitaux.created.label">Created</th>
+                <th scope="col" i18n="@@rapportHopitaux.exportingDate.label">Exporting Date</th>
+                <th scope="col" i18n="@@rapportHopitaux.importingDate.label">Importing Date</th>
+                <th scope="col" i18n="@@rapportHopitaux.hopital.label">Hopital</th>
+                <th scope="col" i18n="@@rapportHopitaux.drsp.label">Drsp</th>
+                <th><!-- --></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (rapportHopitaux of rapportHopitauxes; track rapportHopitaux.id) {
+            <tr>
+                <td>{{ rapportHopitaux.id }}</td>
+                <td>{{ rapportHopitaux.moisAnnee }}</td>
+                <td>{{ rapportHopitaux.name }}</td>
+                <td>{{ rapportHopitaux.created }}</td>
+                <td>{{ rapportHopitaux.exportingDate }}</td>
+                <td>{{ rapportHopitaux.importingDate }}</td>
+                <td>{{ rapportHopitaux.hopital }}</td>
+                <td>{{ rapportHopitaux.drsp }}</td>
+                <td>
+                    <div class="float-end text-nowrap">
+                        <a [routerLink]="['/rapportHopitauxes/edit', rapportHopitaux.id]" class="btn btn-sm btn-secondary" i18n="@@rapportHopitaux.list.edit">Edit</a>
+                        <button type="button" (click)="confirmDelete(rapportHopitaux.id!)" class="btn btn-sm btn-secondary" i18n="@@rapportHopitaux.list.delete">Delete</button>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+}

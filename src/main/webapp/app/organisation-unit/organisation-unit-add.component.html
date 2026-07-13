@@ -1,0 +1,19 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@organisationUnit.add.headline">Import Organisation Units</h1>
+    <div>
+        <a routerLink="/organisationUnits" class="btn btn-secondary" i18n="@@organisationUnit.add.back">Back to list</a>
+    </div>
+</div>
+<p i18n="@@organisationUnit.import.description">Select a DHIS2 organisation unit export file (JSON) to import. Organisation units that already exist are skipped.</p>
+<div class="mb-3">
+    <input type="file" accept="application/json,.json" class="form-control" style="max-width: 30rem;"
+           [disabled]="importing" (change)="onFileSelected($event)" />
+</div>
+<button type="button" class="btn btn-primary" [disabled]="!selectedFile || importing" (click)="handleImport()">
+    @if (importing) {
+    <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+    <span i18n="@@organisationUnit.import.importing">Importing...</span>
+    } @else {
+    <span i18n="@@organisationUnit.import.submit">Import</span>
+    }
+</button>

@@ -1,0 +1,39 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@detailSDUFS.list.headline">Detail SDUFSs</h1>
+    <div>
+        <a routerLink="/detailSDUFSs/add" class="btn btn-primary ms-2" i18n="@@detailSDUFS.list.createNew">Create new Detail SDUFS</a>
+    </div>
+</div>
+@if (!detailSDUFSs || detailSDUFSs.length === 0) {
+<div i18n="@@detailSDUFS.list.empty">No Detail SDUFSs could be found.</div>
+} @else {
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+        <thead>
+            <tr>
+                <th scope="col" i18n="@@detailSDUFS.id.label">Id</th>
+                <th scope="col" i18n="@@detailSDUFS.sdu.label">Sdu</th>
+                <th scope="col" i18n="@@detailSDUFS.datePeremption.label">Date Peremption</th>
+                <th scope="col" i18n="@@detailSDUFS.detailSDU.label">Detail SDU</th>
+                <th><!-- --></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (detailSDUFS of detailSDUFSs; track detailSDUFS.id) {
+            <tr>
+                <td>{{ detailSDUFS.id }}</td>
+                <td>{{ detailSDUFS.sdu }}</td>
+                <td>{{ detailSDUFS.datePeremption }}</td>
+                <td>{{ detailSDUFS.detailSDU }}</td>
+                <td>
+                    <div class="float-end text-nowrap">
+                        <a [routerLink]="['/detailSDUFSs/edit', detailSDUFS.id]" class="btn btn-sm btn-secondary" i18n="@@detailSDUFS.list.edit">Edit</a>
+                        <button type="button" (click)="confirmDelete(detailSDUFS.id!)" class="btn btn-sm btn-secondary" i18n="@@detailSDUFS.list.delete">Delete</button>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+}

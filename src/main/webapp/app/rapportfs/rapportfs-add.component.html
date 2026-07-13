@@ -1,0 +1,14 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@rapportfs.add.headline">Add Rapportfs</h1>
+    <div>
+        <a routerLink="/rapportfss" class="btn btn-secondary" i18n="@@rapportfs.add.back">Back to list</a>
+    </div>
+</div>
+<form [formGroup]="addForm" (ngSubmit)="handleSubmit()">
+    <app-input-row [group]="addForm" field="name" i18n-label="@@rapportfs.name.label" label="Name" />
+    <app-input-row [group]="addForm" field="created" rowType="timepicker" i18n-label="@@rapportfs.created.label" label="Created" />
+    <app-input-row [group]="addForm" field="exportedDate" rowType="datepicker" i18n-label="@@rapportfs.exportedDate.label" label="Exported Date" />
+    <app-input-row [group]="addForm" field="fs" rowType="select" [options]="fsValues" i18n-label="@@rapportfs.fs.label" label="Fs" />
+    <app-input-row [group]="addForm" field="rapportDistrict" rowType="select" [options]="rapportDistrictValues" i18n-label="@@rapportfs.rapportDistrict.label" label="Rapport District" />
+    <input type="submit" i18n-value="@@rapportfs.add.headline" value="Add Rapportfs" class="btn btn-primary mt-4" />
+</form>

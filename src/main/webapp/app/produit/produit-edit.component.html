@@ -1,0 +1,14 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@produit.edit.headline">Edit Produit</h1>
+    <div>
+        <a routerLink="/produits" class="btn btn-secondary" i18n="@@produit.edit.back">Back to list</a>
+    </div>
+</div>
+<form [formGroup]="editForm" (ngSubmit)="handleSubmit()">
+    <app-input-row [group]="editForm" field="id" rowType="number" i18n-label="@@produit.id.label" label="Id" />
+    <app-input-row [group]="editForm" field="name" i18n-label="@@produit.name.label" label="Name" />
+    <app-input-row [group]="editForm" field="unit" i18n-label="@@produit.unit.label" label="Unit" />
+    <app-input-row [group]="editForm" field="code" i18n-label="@@produit.code.label" label="Code" />
+    <app-input-row [group]="editForm" field="edited" rowType="datetimepicker" i18n-label="@@produit.edited.label" label="Edited" />
+    <input type="submit" i18n-value="@@produit.edit.headline" value="Edit Produit" class="btn btn-primary mt-4" />
+</form>

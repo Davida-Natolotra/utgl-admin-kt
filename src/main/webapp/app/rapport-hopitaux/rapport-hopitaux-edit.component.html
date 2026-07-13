@@ -1,0 +1,17 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@rapportHopitaux.edit.headline">Edit Rapport Hopitaux</h1>
+    <div>
+        <a routerLink="/rapportHopitauxes" class="btn btn-secondary" i18n="@@rapportHopitaux.edit.back">Back to list</a>
+    </div>
+</div>
+<form [formGroup]="editForm" (ngSubmit)="handleSubmit()">
+    <app-input-row [group]="editForm" field="id" i18n-label="@@rapportHopitaux.id.label" label="Id" />
+    <app-input-row [group]="editForm" field="moisAnnee" rowType="datepicker" i18n-label="@@rapportHopitaux.moisAnnee.label" label="Mois Annee" />
+    <app-input-row [group]="editForm" field="name" i18n-label="@@rapportHopitaux.name.label" label="Name" />
+    <app-input-row [group]="editForm" field="created" rowType="datepicker" i18n-label="@@rapportHopitaux.created.label" label="Created" />
+    <app-input-row [group]="editForm" field="exportingDate" rowType="datepicker" i18n-label="@@rapportHopitaux.exportingDate.label" label="Exporting Date" />
+    <app-input-row [group]="editForm" field="importingDate" rowType="datepicker" i18n-label="@@rapportHopitaux.importingDate.label" label="Importing Date" />
+    <app-input-row [group]="editForm" field="hopital" rowType="select" [options]="hopitalValues" i18n-label="@@rapportHopitaux.hopital.label" label="Hopital" />
+    <app-input-row [group]="editForm" field="drsp" rowType="select" [options]="drspValues" i18n-label="@@rapportHopitaux.drsp.label" label="Drsp" />
+    <input type="submit" i18n-value="@@rapportHopitaux.edit.headline" value="Edit Rapport Hopitaux" class="btn btn-primary mt-4" />
+</form>

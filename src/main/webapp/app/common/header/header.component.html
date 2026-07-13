@@ -1,0 +1,40 @@
+<header class="bg-light">
+    <div class="container">
+        <nav class="navbar navbar-light navbar-expand-md">
+            <a routerLink="/" class="navbar-brand">
+                <img ngSrc="logo.png" i18n-alt="@@app.title" alt="Utgl Admin" width="30" height="30" class="d-inline-block align-top" />
+                <span class="ps-1" i18n="@@app.title">Utgl Admin</span>
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarToggle"
+                    i18n-aria-label="@@navigation.toggle" aria-label="Toggle navigation" aria-controls="navbarToggle" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+                <ul class="navbar-nav ms-auto">
+                    <li class="navbar-item">
+                        <a routerLink="/" class="nav-link" i18n="@@navigation.home">Home</a>
+                    </li>
+                    <li class="navbar-item dropdown">
+                        <button type="button" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="navbarEntitiesLink"
+                                aria-expanded="false" i18n="@@navigation.entities">Entities</button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarEntitiesLink">
+                            <li><a routerLink="/produits" class="dropdown-item" i18n="@@produit.list.headline">Produits</a></li>
+                            <li><a routerLink="/organisationUnits" class="dropdown-item" i18n="@@organisationUnit.list.headline">Organisation Units</a></li>
+                            <li><a routerLink="/organisationUnitGroups" class="dropdown-item" i18n="@@organisationUnitGroup.list.headline">Organisation Unit Groups</a></li>
+                            <li><a routerLink="/programmes" class="dropdown-item" i18n="@@programme.list.headline">Programmes</a></li>
+                            <li><a routerLink="/produitProgrammeOrgGroups" class="dropdown-item" i18n="@@produitProgrammeOrgGroup.list.headline">Produit Programme Org Groups</a></li>
+                            <li><a routerLink="/rapportDistricts" class="dropdown-item" i18n="@@rapportDistrict.list.headline">Rapport Districts</a></li>
+                            <li><a routerLink="/detailSDUFSs" class="dropdown-item" i18n="@@detailSDUFS.list.headline">Detail SDUFSs</a></li>
+                            <li><a routerLink="/rapportfss" class="dropdown-item" i18n="@@rapportfs.list.headline">Rapportfses</a></li>
+                            <li><a routerLink="/rapportPhaGDiss" class="dropdown-item" i18n="@@rapportPhaGDis.list.headline">Rapport Pha GDises</a></li>
+                            <li><a routerLink="/rapportFSLignes" class="dropdown-item" i18n="@@rapportFSLigne.list.headline">Rapport FSLignes</a></li>
+                            <li><a routerLink="/detailSDUPhaGDiss" class="dropdown-item" i18n="@@detailSDUPhaGDis.list.headline">Detail SDUPha GDises</a></li>
+                            <li><a routerLink="/rapportHopitauxes" class="dropdown-item" i18n="@@rapportHopitaux.list.headline">Rapport Hopitauxes</a></li>
+                            <li><a routerLink="/detailSDUHopitals" class="dropdown-item" i18n="@@detailSDUHopital.list.headline">Detail SDUHopitals</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>

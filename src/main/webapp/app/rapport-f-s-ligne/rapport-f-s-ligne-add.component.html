@@ -1,0 +1,23 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@rapportFSLigne.add.headline">Add Rapport FSLigne</h1>
+    <div>
+        <a routerLink="/rapportFSLignes" class="btn btn-secondary" i18n="@@rapportFSLigne.add.back">Back to list</a>
+    </div>
+</div>
+<form [formGroup]="addForm" (ngSubmit)="handleSubmit()">
+    <app-input-row [group]="addForm" field="qteDispoDebMois" rowType="number" i18n-label="@@rapportFSLigne.qteDispoDebMois.label" label="Qte Dispo Deb Mois" />
+    <app-input-row [group]="addForm" field="qteRecMois" rowType="number" i18n-label="@@rapportFSLigne.qteRecMois.label" label="Qte Rec Mois" />
+    <app-input-row [group]="addForm" field="qteDistPatient" rowType="number" i18n-label="@@rapportFSLigne.qteDistPatient.label" label="Qte Dist Patient" />
+    <app-input-row [group]="addForm" field="qteDistAC" rowType="number" i18n-label="@@rapportFSLigne.qteDistAC.label" label="Qte Dist AC" />
+    <app-input-row [group]="addForm" field="qtePerimeAvarieMois" rowType="number" i18n-label="@@rapportFSLigne.qtePerimeAvarieMois.label" label="Qte Perime Avarie Mois" />
+    <app-input-row [group]="addForm" field="qteRedeplMois" rowType="number" i18n-label="@@rapportFSLigne.qteRedeplMois.label" label="Qte Redepl Mois" />
+    <app-input-row [group]="addForm" field="nbJourRupture" rowType="number" i18n-label="@@rapportFSLigne.nbJourRupture.label" label="Nb Jour Rupture" />
+    <app-input-row [group]="addForm" field="stockTheorique" rowType="number" i18n-label="@@rapportFSLigne.stockTheorique.label" label="Stock Theorique" />
+    <app-input-row [group]="addForm" field="sDUTotal" rowType="number" i18n-label="@@rapportFSLigne.sDUTotal.label" label="SDUTotal" />
+    <app-input-row [group]="addForm" field="ecart" rowType="number" i18n-label="@@rapportFSLigne.ecart.label" label="Ecart" />
+    <app-input-row [group]="addForm" field="cmm" rowType="number" i18n-label="@@rapportFSLigne.cmm.label" label="Cmm" />
+    <app-input-row [group]="addForm" field="msd" i18n-label="@@rapportFSLigne.msd.label" label="Msd" />
+    <app-input-row [group]="addForm" field="situation" i18n-label="@@rapportFSLigne.situation.label" label="Situation" />
+    <app-input-row [group]="addForm" field="produitProgrammeNiveau" rowType="select" [options]="produitProgrammeNiveauValues" i18n-label="@@rapportFSLigne.produitProgrammeNiveau.label" label="Produit Programme Niveau" />
+    <input type="submit" i18n-value="@@rapportFSLigne.add.headline" value="Add Rapport FSLigne" class="btn btn-primary mt-4" />
+</form>

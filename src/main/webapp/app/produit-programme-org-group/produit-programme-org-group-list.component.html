@@ -1,0 +1,41 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@produitProgrammeOrgGroup.list.headline">Produit Programme Org Groups</h1>
+    <div>
+        <a routerLink="/produitProgrammeOrgGroups/add" class="btn btn-primary ms-2" i18n="@@produitProgrammeOrgGroup.list.createNew">Create new Produit Programme Org Group</a>
+    </div>
+</div>
+@if (!produitProgrammeOrgGroups || produitProgrammeOrgGroups.length === 0) {
+<div i18n="@@produitProgrammeOrgGroup.list.empty">No Produit Programme Org Groups could be found.</div>
+} @else {
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+        <thead>
+            <tr>
+                <th scope="col" i18n="@@produitProgrammeOrgGroup.id.label">Id</th>
+                <th scope="col" i18n="@@produitProgrammeOrgGroup.produit.label">Produit</th>
+                <th scope="col" i18n="@@produitProgrammeOrgGroup.programme.label">Programme</th>
+                <th scope="col" i18n="@@produitProgrammeOrgGroup.orgGroup.label">Org Group</th>
+                <th scope="col" i18n="@@produitProgrammeOrgGroup.produitProgrammeNiveau.label">Produit Programme Niveau</th>
+                <th><!-- --></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (produitProgrammeOrgGroup of produitProgrammeOrgGroups; track produitProgrammeOrgGroup.id) {
+            <tr>
+                <td>{{ produitProgrammeOrgGroup.id }}</td>
+                <td>{{ produitProgrammeOrgGroup.produit }}</td>
+                <td>{{ produitProgrammeOrgGroup.programme }}</td>
+                <td>{{ produitProgrammeOrgGroup.orgGroup }}</td>
+                <td>{{ produitProgrammeOrgGroup.produitProgrammeNiveau }}</td>
+                <td>
+                    <div class="float-end text-nowrap">
+                        <a [routerLink]="['/produitProgrammeOrgGroups/edit', produitProgrammeOrgGroup.id]" class="btn btn-sm btn-secondary" i18n="@@produitProgrammeOrgGroup.list.edit">Edit</a>
+                        <button type="button" (click)="confirmDelete(produitProgrammeOrgGroup.id!)" class="btn btn-sm btn-secondary" i18n="@@produitProgrammeOrgGroup.list.delete">Delete</button>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+}

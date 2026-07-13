@@ -1,0 +1,43 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@rapportfs.list.headline">Rapportfses</h1>
+    <div>
+        <a routerLink="/rapportfss/add" class="btn btn-primary ms-2" i18n="@@rapportfs.list.createNew">Create new Rapportfs</a>
+    </div>
+</div>
+@if (!rapportfses || rapportfses.length === 0) {
+<div i18n="@@rapportfs.list.empty">No Rapportfses could be found.</div>
+} @else {
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+        <thead>
+            <tr>
+                <th scope="col" i18n="@@rapportfs.id.label">Id</th>
+                <th scope="col" i18n="@@rapportfs.name.label">Name</th>
+                <th scope="col" i18n="@@rapportfs.created.label">Created</th>
+                <th scope="col" i18n="@@rapportfs.exportedDate.label">Exported Date</th>
+                <th scope="col" i18n="@@rapportfs.fs.label">Fs</th>
+                <th scope="col" i18n="@@rapportfs.rapportDistrict.label">Rapport District</th>
+                <th><!-- --></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (rapportfs of rapportfses; track rapportfs.id) {
+            <tr>
+                <td>{{ rapportfs.id }}</td>
+                <td>{{ rapportfs.name }}</td>
+                <td>{{ rapportfs.created }}</td>
+                <td>{{ rapportfs.exportedDate }}</td>
+                <td>{{ rapportfs.fs }}</td>
+                <td>{{ rapportfs.rapportDistrict }}</td>
+                <td>
+                    <div class="float-end text-nowrap">
+                        <a [routerLink]="['/rapportfss/edit', rapportfs.id]" class="btn btn-sm btn-secondary" i18n="@@rapportfs.list.edit">Edit</a>
+                        <button type="button" (click)="confirmDelete(rapportfs.id!)" class="btn btn-sm btn-secondary" i18n="@@rapportfs.list.delete">Delete</button>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+}
