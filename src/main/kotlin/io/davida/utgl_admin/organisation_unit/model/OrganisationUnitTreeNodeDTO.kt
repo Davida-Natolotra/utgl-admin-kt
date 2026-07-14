@@ -10,5 +10,6 @@ data class OrganisationUnitTreeNodeDTO(
     val id: String,
     val name: String,
     val level: Int,
-    val childCount: Long
+    val childCount: Long,
+    val parentId: String?
 )

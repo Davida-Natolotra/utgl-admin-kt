@@ -7,6 +7,6 @@
 <form [formGroup]="editForm" (ngSubmit)="handleSubmit()">
     <app-input-row [group]="editForm" field="id" i18n-label="@@organisationUnitGroup.id.label" label="Id" />
     <app-input-row [group]="editForm" field="name" i18n-label="@@organisationUnitGroup.name.label" label="Name" />
-    <app-input-row [group]="editForm" field="organisationUnits" rowType="multiselect" [options]="organisationUnitsValues" i18n-label="@@organisationUnitGroup.organisationUnits.label" label="Organisation Units" />
+    <app-organisation-unit-tree-select [group]="editForm" field="organisationUnits" i18n-label="@@organisationUnitGroup.organisationUnits.label" label="Organisation Units" />
     <input type="submit" i18n-value="@@organisationUnitGroup.edit.headline" value="Edit Organisation Unit Group" class="btn btn-primary mt-4" />
 </form>

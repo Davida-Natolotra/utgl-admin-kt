@@ -32,8 +32,4 @@ export class OrganisationUnitGroupService {
     return this.http.delete(this.resourcePath + '/' + id);
   }
 
-  getOrganisationUnitsValues() {
-    return this.http.get<Record<string, string>>(this.resourcePath + '/organisationUnitsValues');
-  }
-
 }

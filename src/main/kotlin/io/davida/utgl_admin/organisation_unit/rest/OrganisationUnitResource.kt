@@ -73,8 +73,27 @@ class OrganisationUnitResource(
             ResponseEntity<List<OrganisationUnitTreeNodeDTO>> =
             ResponseEntity.ok(organisationUnitService.getTreeNodes(parentId))
 
+    @GetMapping("/tree/expand")
+    fun getExpandedChildren(@RequestParam(name = "ids") ids: List<String>):
+            ResponseEntity<Map<String, List<OrganisationUnitTreeNodeDTO>>> =
+            ResponseEntity.ok(organisationUnitService.getExpandedChildren(ids))
+
+    @GetMapping("/names")
+    fun getNames(@RequestParam(name = "ids") ids: List<String>): ResponseEntity<Map<String, String>> =
+            ResponseEntity.ok(organisationUnitService.getOrganisationUnitNames(ids))
+
     @GetMapping("/parentValues")
-    fun getParentValues(): ResponseEntity<Map<String, String>> =
-            ResponseEntity.ok(organisationUnitService.getOrganisationUnitValues())
+    fun getParentValues(
+        @RequestParam(name = "query", required = false) query: String?,
+        @RequestParam(name = "level", required = false) level: Int?,
+        @RequestParam(name = "limit", required = false) limit: Int?
+    ): ResponseEntity<Map<String, String>> =
+            ResponseEntity.ok(if (query == null && level == null) organisationUnitService.getOrganisationUnitValues()
+                    else organisationUnitService.searchOrganisationUnitValues(query ?: "", level,
+                            limit?.let { maxOf(it, 1) }))
+
+    @GetMapping("/levels")
+    fun getLevels(): ResponseEntity<List<Int>> =
+            ResponseEntity.ok(organisationUnitService.getOrganisationUnitLevels())
 
 }

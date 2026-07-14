@@ -10,6 +10,8 @@ import io.davida.utgl_admin.util.NotFoundException
 import io.davida.utgl_admin.util.ReferencedException
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.context.event.EventListener
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -115,9 +117,44 @@ class OrganisationUnitService(
             if (parentId == null) organisationUnitRepository.findRootTreeNodes()
             else organisationUnitRepository.findChildTreeNodes(parentId)
 
+    /**
+     * For each given id, resolve every ancestor lying on its path (using the materialized
+     * `path` field) and return, for each such ancestor, its full list of children. This lets
+     * the client reveal a whole set of pre-selected units in one round trip by expanding each
+     * returned ancestor with its complete (not partial) child list.
+     */
+    fun getExpandedChildren(ids: List<String>): Map<String, List<OrganisationUnitTreeNodeDTO>> {
+        if (ids.isEmpty()) {
+            return emptyMap()
+        }
+        val parentIds = organisationUnitRepository.findPathsByIdIn(ids)
+                .flatMap { path -> path.split("/").filter { it.isNotBlank() }.dropLast(1) }
+                .toSet()
+        if (parentIds.isEmpty()) {
+            return emptyMap()
+        }
+        return organisationUnitRepository.findChildTreeNodesForParents(parentIds)
+                .groupBy { it.parentId!! }
+    }
+
     fun getOrganisationUnitValues(): Map<String, String> =
             organisationUnitRepository.findAll(Sort.by("id"))
             .stream()
+            .collect(CustomCollectors.toSortedMap(OrganisationUnit::id, OrganisationUnit::name))
+
+    fun searchOrganisationUnitValues(query: String, level: Int?, limit: Int?): Map<String, String> {
+        val pageable: Pageable = if (limit == null) Pageable.unpaged(Sort.by("name"))
+                else PageRequest.of(0, limit, Sort.by("name"))
+        val results = if (level == null) organisationUnitRepository.findByNameContainingIgnoreCase(query, pageable)
+                else organisationUnitRepository.findByNameContainingIgnoreCaseAndLevel(query, level, pageable)
+        return results.stream()
+                .collect(CustomCollectors.toSortedMap(OrganisationUnit::id, OrganisationUnit::name))
+    }
+
+    fun getOrganisationUnitLevels(): List<Int> = organisationUnitRepository.findDistinctLevels()
+
+    fun getOrganisationUnitNames(ids: List<String>): Map<String, String> =
+            organisationUnitRepository.findAllById(ids).stream()
             .collect(CustomCollectors.toSortedMap(OrganisationUnit::id, OrganisationUnit::name))
 
     @EventListener(BeforeDeleteOrganisationUnit::class)

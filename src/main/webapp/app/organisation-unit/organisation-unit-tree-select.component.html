@@ -1,0 +1,109 @@
+<div class="row mb-3">
+    <label class="col-md-2 col-form-label">
+        {{ label + (isRequired() ? '*' : '') }}
+    </label>
+    <div class="col-md-10">
+        <div class="row g-3" style="height: 28rem;">
+            <div class="col-md-6 h-100 d-flex flex-column">
+                <div class="d-flex gap-2 mb-2">
+                    <input [id]="field + '_search'" type="search" [formControl]="searchControl" autocomplete="off"
+                            class="form-control" placeholder="Filter by name" i18n-placeholder="@@organisationUnit.tree.filter" />
+                    @if (matchedIds.size > 0) {
+                    <button type="button" class="btn btn-outline-primary text-nowrap" (click)="selectAllMatched()">
+                        <span i18n="@@organisationUnit.tree.selectAll">Select all</span> ({{ matchedIds.size }})
+                    </button>
+                    }
+                </div>
+                @if ((searchControl.value || '').trim().length >= 2 && matchedIds.size === 0) {
+                <div class="text-body-secondary small mb-2" i18n="@@organisationUnit.tree.noMatch">No Organisation Units match the filter.</div>
+                }
+                @if (matchedIds.size === matchLimit) {
+                <div class="text-body-secondary small mb-2" i18n="@@organisationUnit.tree.tooManyMatches">Showing the first {{ matchLimit }} matches - refine your search to narrow further.</div>
+                }
+                <div class="mb-2 position-relative">
+                    <button type="button" class="btn btn-outline-secondary dropdown-toggle"
+                            (click)="levelMenuOpen = !levelMenuOpen" [attr.aria-expanded]="levelMenuOpen">
+                        @if (selectedLevel === null) {
+                        <span i18n="@@organisationUnit.tree.filterByLevel">Filter by level</span>
+                        } @else {
+                        <span i18n="@@organisationUnit.tree.level">Level</span>: {{ selectedLevel }}
+                        }
+                    </button>
+                    @if (levelMenuOpen) {
+                    <div class="dropdown-menu show">
+                        <button type="button" class="dropdown-item {{ selectedLevel === null ? 'active' : '' }}"
+                                (click)="setLevel(null)" i18n="@@organisationUnit.tree.allLevels">All levels</button>
+                        @for (level of levels; track level) {
+                        <button type="button" class="dropdown-item {{ level === selectedLevel ? 'active' : '' }}"
+                                (click)="setLevel(level)">
+                            <span i18n="@@organisationUnit.tree.level">Level</span> {{ level }}
+                        </button>
+                        }
+                    </div>
+                    }
+                </div>
+                <div class="border rounded flex-grow-1 {{ hasErrors() ? 'border-danger' : '' }}" style="min-height: 0;">
+                    @if (!roots) {
+                    <div class="p-2">
+                        <span class="spinner-border spinner-border-sm text-secondary" role="status" aria-hidden="true"></span>
+                    </div>
+                    } @else if (roots.length === 0) {
+                    <div class="text-body-secondary p-2" i18n="@@organisationUnit.tree.empty">No Organisation Units could be found.</div>
+                    } @else {
+                    <cdk-virtual-scroll-viewport itemSize="36" class="h-100">
+                        <div *cdkVirtualFor="let item of visibleNodes; trackBy: trackByNode"
+                                class="px-2 py-1 {{ isMatched(item.node) ? 'bg-primary-subtle rounded' : '' }}"
+                                [style.margin-left.rem]="item.depth * 1.25">
+                            <div class="d-flex align-items-center gap-2">
+                                <div style="width: 1.5rem; flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                    @if (item.node.loading) {
+                                    <span class="spinner-border spinner-border-sm text-secondary" role="status" aria-hidden="true"></span>
+                                    } @else if (item.node.childCount > 0) {
+                                    <button type="button" class="btn btn-sm btn-link p-0 text-decoration-none text-secondary"
+                                            (click)="toggle(item.node)" [attr.aria-expanded]="!!item.node.expanded"
+                                            [attr.aria-label]="item.node.expanded ? 'Collapse' : 'Expand'">
+                                        {{ item.node.expanded ? '▾' : '▸' }}
+                                    </button>
+                                    }
+                                </div>
+                                <div class="form-check mb-0 flex-grow-1">
+                                    <input [id]="field + '_' + item.node.id" type="checkbox" class="form-check-input"
+                                            [checked]="isSelected(item.node)" [indeterminate]="isIndeterminate(item.node)"
+                                            (change)="toggleSelection(item.node)" />
+                                    <label [for]="field + '_' + item.node.id" class="form-check-label">{{ item.node.name }}</label>
+                                </div>
+                                @if (item.node.childCount > 0) {
+                                <span class="badge text-bg-light flex-shrink-0">{{ item.node.childCount }}</span>
+                                }
+                            </div>
+                        </div>
+                    </cdk-virtual-scroll-viewport>
+                    }
+                </div>
+            </div>
+            <div class="col-md-6 h-100 d-flex flex-column">
+                <div class="d-flex gap-2 mb-2 align-items-center">
+                    <span class="form-text flex-shrink-0"><span i18n="@@organisationUnit.tree.selected">Selected:</span> {{ selected.size }}</span>
+                    <input type="search" [formControl]="selectedSearchControl" autocomplete="off"
+                            class="form-control" placeholder="Filter selected" i18n-placeholder="@@organisationUnit.tree.filterSelected" />
+                </div>
+                <div class="border rounded flex-grow-1" style="min-height: 0;">
+                    @if (selectedList.length === 0) {
+                    <div class="text-body-secondary p-2" i18n="@@organisationUnit.tree.noneSelected">No Organisation Units selected yet.</div>
+                    } @else {
+                    <cdk-virtual-scroll-viewport itemSize="44" class="h-100 list-group list-group-flush">
+                        <div *cdkVirtualFor="let unit of selectedList; trackBy: trackById"
+                                class="list-group-item d-flex justify-content-between align-items-center gap-2 {{ unit.matched ? 'active' : '' }}">
+                            <span class="text-truncate">{{ unit.name }}</span>
+                            <button type="button" class="btn-close flex-shrink-0 {{ unit.matched ? 'btn-close-white' : '' }}" aria-label="Remove"
+                                    i18n-aria-label="@@organisationUnit.tree.remove"
+                                    (click)="toggleSelectionById(unit.id)"></button>
+                        </div>
+                    </cdk-virtual-scroll-viewport>
+                    }
+                </div>
+            </div>
+        </div>
+        <app-input-errors [showErrors]="hasErrors()" [errors]="control?.errors" />
+    </div>
+</div>

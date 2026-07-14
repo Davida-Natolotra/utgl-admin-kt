@@ -1,6 +1,5 @@
 package io.davida.utgl_admin.organisation_unit_group.rest
 
-import io.davida.utgl_admin.organisation_unit.service.OrganisationUnitService
 import io.davida.utgl_admin.organisation_unit_group.model.OrganisationUnitGroupDTO
 import io.davida.utgl_admin.organisation_unit_group.service.OrganisationUnitGroupService
 import io.swagger.v3.oas.annotations.responses.ApiResponse
@@ -26,8 +25,7 @@ import org.springframework.web.bind.annotation.RestController
     produces = [MediaType.APPLICATION_JSON_VALUE]
 )
 class OrganisationUnitGroupResource(
-    private val organisationUnitGroupService: OrganisationUnitGroupService,
-    private val organisationUnitService: OrganisationUnitService
+    private val organisationUnitGroupService: OrganisationUnitGroupService
 ) {
 
     @GetMapping
@@ -60,9 +58,5 @@ class OrganisationUnitGroupResource(
         organisationUnitGroupService.delete(id)
         return ResponseEntity.noContent().build()
     }
-
-    @GetMapping("/organisationUnitsValues")
-    fun getOrganisationUnitsValues(): ResponseEntity<Map<String, String>> =
-            ResponseEntity.ok(organisationUnitService.getOrganisationUnitValues())
 
 }

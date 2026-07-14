@@ -1,8 +1,9 @@
-import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 import { InputRowComponent } from 'app/common/input-row/input-row.component';
+import { OrganisationUnitTreeSelectComponent } from 'app/organisation-unit/organisation-unit-tree-select.component';
 import { OrganisationUnitGroupService } from 'app/organisation-unit-group/organisation-unit-group.service';
 import { OrganisationUnitGroupDTO } from 'app/organisation-unit-group/organisation-unit-group.model';
 import { ErrorHandler } from 'app/common/error-handler.injectable';
@@ -10,17 +11,14 @@ import { ErrorHandler } from 'app/common/error-handler.injectable';
 
 @Component({
   selector: 'app-organisation-unit-group-add',
-  imports: [CommonModule, RouterLink, ReactiveFormsModule, InputRowComponent],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule, InputRowComponent, OrganisationUnitTreeSelectComponent],
   templateUrl: './organisation-unit-group-add.component.html'
 })
-export class OrganisationUnitGroupAddComponent implements OnInit {
+export class OrganisationUnitGroupAddComponent {
 
   organisationUnitGroupService = inject(OrganisationUnitGroupService);
   router = inject(Router);
   errorHandler = inject(ErrorHandler);
-  changeDetectorRef = inject(ChangeDetectorRef);
-
-  organisationUnitsValues?: Record<string,string>;
 
   addForm = new FormGroup({
     name: new FormControl(null, [Validators.maxLength(255)]),
@@ -32,17 +30,6 @@ export class OrganisationUnitGroupAddComponent implements OnInit {
       created: $localize`:@@organisationUnitGroup.create.success:Organisation Unit Group was created successfully.`
     };
     return messages[key];
-  }
-
-  ngOnInit() {
-    this.organisationUnitGroupService.getOrganisationUnitsValues()
-        .subscribe({
-          next: (data) => {
-            this.organisationUnitsValues = data;
-            this.changeDetectorRef.markForCheck();
-          },
-          error: (error) => this.errorHandler.handleServerError(error.error)
-        });
   }
 
   handleSubmit() {

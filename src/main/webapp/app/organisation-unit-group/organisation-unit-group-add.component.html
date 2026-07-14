@@ -6,6 +6,6 @@
 </div>
 <form [formGroup]="addForm" (ngSubmit)="handleSubmit()">
     <app-input-row [group]="addForm" field="name" i18n-label="@@organisationUnitGroup.name.label" label="Name" />
-    <app-input-row [group]="addForm" field="organisationUnits" rowType="multiselect" [options]="organisationUnitsValues" i18n-label="@@organisationUnitGroup.organisationUnits.label" label="Organisation Units" />
+    <app-organisation-unit-tree-select [group]="addForm" field="organisationUnits" i18n-label="@@organisationUnitGroup.organisationUnits.label" label="Organisation Units" />
     <input type="submit" i18n-value="@@organisationUnitGroup.add.headline" value="Add Organisation Unit Group" class="btn btn-primary mt-4" />
 </form>

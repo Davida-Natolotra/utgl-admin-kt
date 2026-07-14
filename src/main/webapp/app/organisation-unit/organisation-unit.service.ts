@@ -44,8 +44,30 @@ export class OrganisationUnitService {
     return this.http.post<OrganisationUnitImportResult>(this.resourcePath + '/import', formData);
   }
 
-  getParentValues() {
-    return this.http.get<Record<string, string>>(this.resourcePath + '/parentValues');
+  getParentValues(query?: string, limit?: number, level?: number) {
+    return this.http.get<Record<string, string>>(this.resourcePath + '/parentValues', {
+      params: {
+        ...(query === undefined ? {} : { query }),
+        ...(limit === undefined ? {} : { limit }),
+        ...(level === undefined ? {} : { level })
+      }
+    });
+  }
+
+  getExpandedChildren(ids: string[]) {
+    return this.http.get<Record<string, OrganisationUnitTreeNode[]>>(this.resourcePath + '/tree/expand', {
+      params: { ids: ids.join(',') }
+    });
+  }
+
+  getNames(ids: string[]) {
+    return this.http.get<Record<string, string>>(this.resourcePath + '/names', {
+      params: { ids: ids.join(',') }
+    });
+  }
+
+  getLevels() {
+    return this.http.get<number[]>(this.resourcePath + '/levels');
   }
 
 }
